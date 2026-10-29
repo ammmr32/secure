@@ -1,0 +1,405 @@
+\<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحقق الرقمي | منصة التحديات السيبرانية</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #030712;
+            /* خلفية تقنية متحركة ومضيئة بأسلوب السايبر */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+                linear-gradient(rgba(15, 23, 42, 0.7) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 23, 42, 0.7) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 16px;
+        }
+
+        .title {
+            color: #38bdf8;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 6px;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .progress-box {
+            background-color: rgba(3, 7, 18, 0.6);
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 14px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            background-color: #1f2937;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(to left, #38bdf8, #10b981);
+            height: 100%;
+            transition: width 0.4s ease;
+        }
+
+        .card {
+            background-color: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s ease;
+        }
+
+        .card:hover {
+            border-color: #38bdf8;
+            background-color: rgba(15, 23, 42, 0.85);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .card.done {
+            border-color: rgba(16, 185, 129, 0.4);
+            background-color: rgba(16, 185, 129, 0.08);
+        }
+
+        .quiz-box {
+            background-color: rgba(3, 7, 18, 0.7);
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+
+        .btn:hover { opacity: 0.9; transform: scale(0.99); }
+
+        .btn-danger { background-color: #ef4444; }
+        .btn-success { background-color: #10b981; }
+        .btn-primary { 
+            background: linear-gradient(to left, #38bdf8, #0284c7); 
+            color: #030712; 
+            font-weight: 900;
+            margin-top: 12px; 
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
+        }
+        .btn-option { 
+            background-color: rgba(3, 7, 18, 0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            text-align: right; 
+            width: 100%; 
+            margin-bottom: 8px; 
+            color: #f8fafc;
+        }
+        .btn-option:hover { border-color: #38bdf8; background-color: rgba(15, 23, 42, 0.8); }
+
+        .feedback {
+            background-color: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .certificate {
+            text-align: center;
+            border: 3px double #f59e0b;
+            padding: 24px;
+            border-radius: 16px;
+            background-color: #111827;
+        }
+
+        .input-name {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(3, 7, 18, 0.6);
+            color: #fff;
+            margin-bottom: 12px;
+            text-align: center;
+            outline: none;
+            font-size: 13px;
+        }
+        .input-name:focus { border-color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+
+        @media print {
+            body { background: white !important; color: black !important; }
+            .container { border: none; box-shadow: none; width: 100%; max-width: 100%; background: white !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app"></div>
+
+<script>
+    let state = {
+        activeModule: null,
+        currentIndex: 0,
+        completedModules: [],
+        feedback: null,
+        isCorrect: false,
+        userName: '',
+        showCert: false
+    };
+
+    const modules = [
+        { id: 1, title: 'التصيد الاحتيالي', desc: 'كشف الرسائل والروابط الوهمية', icon: '🎣' },
+        { id: 2, title: 'قوة كلمات المرور', desc: 'تمييز الكلمات القوية عن الضعيفة', icon: '🔐' },
+        { id: 3, title: 'أمن الروابط والمواقع', desc: 'تحليل الروابط المشبوهة والآمنة', icon: '🌐' },
+        { id: 4, title: 'سيناريوهات الدفاع السيبراني', desc: 'اختبار المعرفة وحماية البيانات', icon: '🛡️' }
+    ];
+
+    const questions = {
+        1: [
+            { q: 'تنبيه مصرفي: تم تجميد حسابك البنكي مؤقتاً لتحديث البيانات عبر الرابط: http://bit.ly/bank-sec-update', type: 'phishing', exp: 'احذر! الجهات الرسمية والبنوك لا تطلب أبداً تحديث البيانات عبر روابط قصيرة أو مجهولة.' },
+            { q: 'عزيزي العميل، شحنتك بانتظار الاستلام. يمكنك تتبع المسار حصرياً عبر تطبيق (سبل) الرسمي.', type: 'safe', exp: 'صحيح تماماً. الرسالة آمنة وتوجهك للتطبيق الرسمي دون طلب بيانات حساسة.' },
+            { q: 'مبروك! لقد فزت بجائزة مالية قدرها 5000 ريال. اضغط هنا لتأكيد رقم الحساب وتحويل المبلغ فوراً.', type: 'phishing', exp: 'هذه إحدى أشهر حيل التصيد الاحتيالي لسرقة الحسابات المصرفية.' }
+        ],
+        2: [
+            { q: 'كلمة المرور المستخدمة: 123456789', isStrong: false, exp: 'ضعيفة للغاية! الأرقام المتسلسلة يمكن كشفها فوراً عبر برامج التخمين.' },
+            { q: 'كلمة المرور المستخدمة: P$9#mK!2vL_x', isStrong: true, exp: 'ممتاز! كلمة مرور معقدة وطويلة وتحتوي على رموز وحروف وأرقام.' },
+            { q: 'كلمة المرور المستخدمة: password2026', isStrong: false, exp: 'ضعيفة لأنها تحتوي على كلمة شائعة يسهل الوصول إليها.' }
+        ],
+        3: [
+            { q: 'رابط الموقع: https://www.absher.sa/portal/landing', isSafe: true, exp: 'رابط رسمي وموثوق ومحمّل بشهادة تشفير حقيقية تعود لمنصة أبشر الحكومية.' },
+            { q: 'رابط الموقع: http://login-apple-id-support.com/verify', isSafe: false, exp: 'رابط مزيف تماماً يقلد شركة آبل لسرقة بيانات تسجيل الدخول.' },
+            { q: 'رابط الموقع: https://www.google.com', isSafe: true, exp: 'رابط آمن ورسمي لمحرك البحث العالمي جوجل.' }
+        ],
+        4: [
+            { q: 'ما هي الطريقة الأبرز والأكثر فاعلية لتأمين حساباتك الشخصية ضد الاختراق؟', opts: ['استخدام نفس كلمة المرور القوية لكل المواقع', 'تفعيل المصادقة الثنائية (2FA)', 'كتابة كلمات المرور في ملاحظات الهاتف'], correct: 1, exp: 'المصادقة الثنائية تضيف طبقة حماية ثانية تمنع المخترق من الدخول حتى لو عرف كلمة المرور.' },
+            { q: 'ماذا تعني الحروف HTTPS في بداية عناوين مواقع الإنترنت؟', opts: ['أن الموقع ذو محتوى سريع التصفح', 'أن الاتصال بين جهازك والموقع مشفر وآمن', 'أن الموقع يتبع جهة حكومية رسمية'], correct: 1, exp: 'تعني أن البيانات المتبادلة مشفرة بالكامل ولا يمكن التجسس عليها عبر الشبكة.' },
+            { q: 'لماذا يُحذر الخبراء من إعادة استخدام نفس كلمة المرور في منصات متعددة؟', opts: ['لتجنب بطء استجابة التطبيقات', 'لتفادي الاختراق الشامل لبقية حساباتك في حال تسريب إحداها', 'لأن المتصفح لا يدعم حفظ كلمة مرور واحدة'], correct: 1, exp: 'تسريب كلمة مرور واحدة في موقع تجاري سيؤدي فوراً لاختراق بريدك وباقي حساباتك.' }
+        ]
+    };
+
+    function setState(newState) {
+        state = { ...state, ...newState };
+        render();
+    }
+
+    function selectModule(id) {
+        if (state.completedModules.includes(id)) return;
+        setState({ activeModule: id, currentIndex: 0, feedback: null });
+    }
+
+    function handleAnswer(choice) {
+        const currentQ = questions[state.activeModule][state.currentIndex];
+        let correct = false;
+
+        if (state.activeModule === 1) correct = (choice === (currentQ.type === 'phishing'));
+        else if (state.activeModule === 2) correct = (choice === currentQ.isStrong);
+        else if (state.activeModule === 3) correct = (choice === currentQ.isSafe);
+        else if (state.activeModule === 4) correct = (choice === currentQ.correct);
+
+        setState({ feedback: currentQ.exp, isCorrect: correct });
+    }
+
+    function nextStep() {
+        const modQuestions = questions[state.activeModule];
+        if (state.currentIndex + 1 < modQuestions.length) {
+            setState({ currentIndex: state.currentIndex + 1, feedback: null });
+        } else {
+            const newCompleted = [...state.completedModules, state.activeModule];
+            setState({ completedModules: newCompleted, activeModule: null, feedback: null });
+        }
+    }
+
+    function render() {
+        const app = document.getElementById('app');
+
+        if (state.showCert) {
+            app.innerHTML = `
+                <div class="certificate">
+                    <div style="font-size: 40px; margin-bottom: 8px;">🏆</div>
+                    <h2 style="color: #f59e0b; font-size: 20px; margin-bottom: 4px;">شهادة اجتياز احترافية</h2>
+                    <p style="color: #94a3b8; font-size: 11px; margin-bottom: 20px;">منصة المحقق الرقمي للأمن السيبراني</p>
+                    
+                    <div style="border-top: 1px solid #1f2937; border-bottom: 1px solid #1f2937; padding: 16px 0; margin-bottom: 16px;">
+                        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">تمنح هذه الشهادة بكل فخر إلى:</p>
+                        <h3 style="color: #38bdf8; font-size: 22px; font-weight: 900; margin-bottom: 8px;">${state.userName || 'المحقق السيبراني'}</h3>
+                        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5;">
+                            لاجتيازه بنجاح تام كافة التحديات والمهام السيبرانية الأساسية وحماية البيانات.
+                        </p>
+                    </div>
+
+                    <div class="no-print">
+                        <button class="btn btn-success" onclick="window.print()" style="margin-bottom: 8px;">🖨️ طباعة أو حفظ الشهادة PDF</button>
+                        <button class="btn" style="background-color: #1f2937; color: #cbd5e1;" onclick="setState({showCert: false})">العودة للقائمة الرئيسية</button>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        if (state.activeModule !== null) {
+            const currentQ = questions[state.activeModule][state.currentIndex];
+            const totalQ = questions[state.activeModule].length;
+            let optionsMarkup = '';
+
+            if (state.activeModule === 1) {
+                optionsMarkup = `
+                    <div style="display: flex; gap: 10px; margin-top: 16px;">
+                        <button onclick="handleAnswer(true)" ${state.feedback ? 'disabled' : ''} class="btn btn-danger">🚨 رسالة مشبوهة</button>
+                        <button onclick="handleAnswer(false)" ${state.feedback ? 'disabled' : ''} class="btn btn-success">✅ رسالة آمنة</button>
+                    </div>
+                `;
+            } else if (state.activeModule === 2) {
+                optionsMarkup = `
+                    <div style="display: flex; gap: 10px; margin-top: 16px;">
+                        <button onclick="handleAnswer(false)" ${state.feedback ? 'disabled' : ''} class="btn btn-danger">❌ كلمة ضعيفة</button>
+                        <button onclick="handleAnswer(true)" ${state.feedback ? 'disabled' : ''} class="btn btn-success">🔒 كلمة قوية</button>
+                    </div>
+                `;
+            } else if (state.activeModule === 3) {
+                optionsMarkup = `
+                    <div style="display: flex; gap: 10px; margin-top: 16px;">
+                        <button onclick="handleAnswer(false)" ${state.feedback ? 'disabled' : ''} class="btn btn-danger">🚨 غير آمن</button>
+                        <button onclick="handleAnswer(true)" ${state.feedback ? 'disabled' : ''} class="btn btn-success">🛡️ رابط آمن</button>
+                    </div>
+                `;
+            } else if (state.activeModule === 4) {
+                optionsMarkup = `<div style="margin-top: 16px;">` + currentQ.opts.map((opt, idx) => `
+                    <button onclick="handleAnswer(${idx})" ${state.feedback ? 'disabled' : ''} class="btn btn-option">${idx + 1}. ${opt}</button>
+                `).join('') + `</div>`;
+            }
+
+            app.innerHTML = `
+                <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="subtitle" style="color: #38bdf8; font-weight: bold;">مهمة تحقيق نشطة</div>
+                        <div class="title" style="font-size: 16px; margin-top: 2px;">السؤال ${state.currentIndex + 1} من ${totalQ}</div>
+                    </div>
+                    <button onclick="setState({activeModule: null, feedback: null})" style="background: rgba(255,255,255,0.08); border: none; color: #94a3b8; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 11px;">إلغاء</button>
+                </div>
+                <div class="quiz-box">${currentQ.q}</div>
+                ${optionsMarkup}
+                ${state.feedback ? `
+                    <div class="feedback">
+                        <div style="font-weight: bold; margin-bottom: 4px; color: ${state.isCorrect ? '#10b981' : '#ef4444'};">
+                            ${state.isCorrect ? '✨ إجابة صحيحة وموفقة' : '⚠️ تنبيه: تحليل غير دقيق'}
+                        </div>
+                        <div>${state.feedback}</div>
+                        <button class="btn btn-primary" onclick="nextStep()">السؤال التالي ⬅️</button>
+                    </div>
+                ` : ''}
+            `;
+            return;
+        }
+
+        const allDone = state.completedModules.length === modules.length;
+        const progressPercent = (state.completedModules.length / modules.length) * 100;
+
+        app.innerHTML = `
+            <div class="header">
+                <div class="title">🕵️‍♂️ المحقق الرقمي</div>
+                <div class="subtitle">منصة التحديات التفاعلية للأمن السيبراني</div>
+                <div class="progress-box">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8;">
+                        <span>مستوى التقدم الكلي</span>
+                        <span style="color: #38bdf8; font-weight: bold;">${state.completedModules.length} من ${modules.length} مهام</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: ${progressPercent}%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                ${modules.map(m => {
+                    const isDone = state.completedModules.includes(m.id);
+                    return `
+                        <div class="card ${isDone ? 'done' : ''}" onclick="selectModule(${m.id})">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 22px;">${m.icon}</span>
+                                <div>
+                                    <div style="font-size: 13px; font-weight: bold; color: #f8fafc;">${m.title}</div>
+                                    <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">${m.desc}</div>
+                                </div>
+                            </div>
+                            <span style="font-size: 11px; font-weight: bold; color: ${isDone ? '#10b981' : '#38bdf8'};">
+                                ${isDone ? 'مكتمل ✅' : 'ابدأ ◀'}
+                            </span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+
+            <div style="margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px;">
+                <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 6px;">اكتب اسمك للشهادة:</label>
+                <input type="text" class="input-name" placeholder="مثال: رها المالكي..." value="${state.userName}" oninput="state.userName = this.value">
+                <button class="btn" ${!allDone ? 'style="background-color: rgba(255,255,255,0.05); color: #64748b; cursor: not-allowed;"' : 'style="background: linear-gradient(to left, #10b981, #059669); color: white;"'} onclick="if(${allDone}) setState({showCert: true})">
+                    ${allDone ? '🎓 استعراض شهادة الاعتماد السيبراني' : '🔒 أكمل كافة التحديات لفتح الشهادة'}
+                </button>
+            </div>
+        `;
+    }
+
+    render();
+</script>
+</body>
+</html>
